@@ -5,10 +5,10 @@ class Tim < Formula
 
   if OS.mac?
     unless Hardware::CPU.arm?
-      odie "tim is only available for macOS arm64 currently."
+      odie "tim is only available for osx arm64 currently."
     end
 
-    url "https://github.com/blankoslo/tim/releases/download/0.0.11/tim-macos.tar.gz"
+    url "https://github.com/blankoslo/tim/releases/download/0.0.11/tim-osx.tar.gz"
     sha256 "3303c7b9e68a5b4bfa8379304a17cca8f2c7accbca6b67d196732264c89128ea"
   elsif OS.linux?
     unless Hardware::CPU.intel?

@@ -8,7 +8,7 @@ class Tim < Formula
       odie "tim is only available for macOS arm64 currently."
     end
 
-    url "https://github.com/blankoslo/tim/releases/download/{{VERSION}}/tim-macos.tar.gz"
+    url "https://github.com/blankoslo/tim/releases/download/{{VERSION}}/tim-osx.tar.gz"
     sha256 "{{MACOS_SHA}}"
   elsif OS.linux?
     unless Hardware::CPU.intel?

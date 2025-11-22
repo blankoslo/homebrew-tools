@@ -1,0 +1,25 @@
+class Tim < Formula
+  desc "tim - timeføring cli"
+  homepage "https://github.com/blankoslo/tim"
+  version "{{VERSION}}"
+
+  if OS.mac?
+    unless Hardware::CPU.arm?
+      odie "tim is only available for macOS arm64 currently."
+    end
+
+    url "https://github.com/blankoslo/tim/releases/download/{{VERSION}}/tim-macos.tar.gz"
+    sha256 "{{MACOS_SHA}}"
+  elsif OS.linux?
+    unless Hardware::CPU.intel?
+      odie "tim is only available for Linux x86_64 currently."
+    end
+    
+    url "https://github.com/blankoslo/tim/releases/download/{{VERSION}}/tim-linux.tar.gz"
+    sha256 "{{LINUX_SHA}}"
+  end
+
+  def install
+    bin.install "tim"
+  end
+end

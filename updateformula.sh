@@ -11,9 +11,6 @@ VERSION="$1"
 TEMPLATE_FILE="tim.template"
 FORMULA_FILE="Formula/tim.rb"
 
-MACOS_URL="https://github.com/blankoslo/tim/releases/download/$VERSION/tim-osx.tar.gz"
-LINUX_URL="https://github.com/blankoslo/tim/releases/download/$VERSION/tim-linux.tar.gz"
-
 if [ ! -f "$TEMPLATE_FILE" ]; then
   echo "Template file '$TEMPLATE_FILE' not found." >&2
   exit 1

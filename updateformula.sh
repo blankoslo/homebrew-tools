@@ -11,7 +11,7 @@ VERSION="$1"
 TEMPLATE_FILE="tim.template"
 FORMULA_FILE="Formula/tim.rb"
 
-MACOS_URL="https://github.com/blankoslo/tim/releases/download/$VERSION/tim-macos.tar.gz"
+MACOS_URL="https://github.com/blankoslo/tim/releases/download/$VERSION/tim-osx.tar.gz"
 LINUX_URL="https://github.com/blankoslo/tim/releases/download/$VERSION/tim-linux.tar.gz"
 
 if [ ! -f "$TEMPLATE_FILE" ]; then
@@ -23,21 +23,27 @@ TMPDIR=$(mktemp -d)
 cleanup() { rm -rf "$TMPDIR"; }
 trap cleanup EXIT
 
+# Check if gh CLI is available
+if ! command -v gh &> /dev/null; then
+  echo "Error: GitHub CLI (gh) is not installed." >&2
+  echo "Install it with: brew install gh" >&2
+  exit 1
+fi
+
 download() {
-  local label="$1" url="$2" out="$3"
+  local label="$1" asset="$2" out="$3"
   echo "Downloading $label tarball..."
-  if ! curl -fsSL -o "$out" "$url"; then
-    echo "Error: failed to download $label tarball from $url" >&2
-    # If GitHub returned 404, suggest checking release assets.
+  if ! gh release download "$VERSION" --repo blankoslo/tim --pattern "$asset" --output "$out"; then
+    echo "Error: failed to download $label tarball ($asset)" >&2
     echo "Hint: verify the asset exists for version $VERSION." >&2
     exit 1
   fi
 }
 
-download "macOS arm64" "$MACOS_URL" "$TMPDIR/tim-macos.tar.gz"
-download "linux x64" "$LINUX_URL" "$TMPDIR/tim-linux.tar.gz"
+download "osx" "tim-osx.tar.gz" "$TMPDIR/tim-osx.tar.gz"
+download "linux" "tim-linux.tar.gz" "$TMPDIR/tim-linux.tar.gz"
 
-MACOS_SHA=$(shasum -a 256 "$TMPDIR/tim-macos.tar.gz" | awk '{print $1}')
+MACOS_SHA=$(shasum -a 256 "$TMPDIR/tim-osx.tar.gz" | awk '{print $1}')
 LINUX_SHA=$(shasum -a 256 "$TMPDIR/tim-linux.tar.gz" | awk '{print $1}')
 
 # Read template and replace placeholders

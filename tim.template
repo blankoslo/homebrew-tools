@@ -14,7 +14,7 @@ class Tim < Formula
     unless Hardware::CPU.intel?
       odie "tim is only available for Linux x86_64 currently."
     end
-    
+
     url "https://homebrewfiles.blob.core.windows.net/tim/{{VERSION}}/tim-linux.tar.gz"
     sha256 "{{LINUX_SHA}}"
   end

@@ -1,22 +1,22 @@
 class Tim < Formula
   desc "tim - floq cli"
   homepage "https://github.com/blankoslo/tim"
-  version "0.0.12"
+  version "0.1.0"
 
   if OS.mac?
     unless Hardware::CPU.arm?
       odie "tim is only available for macOS arm64 currently."
     end
 
-    url "https://homebrewfiles.blob.core.windows.net/tim/0.0.12/tim-osx.tar.gz"
-    sha256 "adffd5592574d46429171bc553565ab7ac69a9f87f4dc51f71e5fc723a3714fb"
+    url "https://homebrewfiles.blob.core.windows.net/tim/0.1.0/tim-osx.tar.gz"
+    sha256 "f07d75785997d921a0d5260a41f49069039af71255c2bfc0e2966c0419807aff"
   elsif OS.linux?
     unless Hardware::CPU.intel?
       odie "tim is only available for Linux x86_64 currently."
     end
     
-    url "https://homebrewfiles.blob.core.windows.net/tim/0.0.12/tim-linux.tar.gz"
-    sha256 "7d69e5a554793199db217a16b9ac807e4f4de3d331a9e63e5419566ff979602a"
+    url "https://homebrewfiles.blob.core.windows.net/tim/0.1.0/tim-linux.tar.gz"
+    sha256 "d3ce109c07f3ec19981f4c58b5224088c6574cffaf28bd6c6b5d37633e785e06"
   end
 
   def install
